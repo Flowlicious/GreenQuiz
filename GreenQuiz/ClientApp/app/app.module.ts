@@ -6,16 +6,20 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import {AUTH_PROVIDERS} from 'angular2-jwt';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { QuizManagementComponent } from './components/quizManagement/quiz.management.component';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent],
     declarations: [
         AppComponent,
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        QuizComponent,
+        QuizManagementComponent
     ],
     providers: [
         AUTH_PROVIDERS
@@ -27,6 +31,8 @@ import {AUTH_PROVIDERS} from 'angular2-jwt';
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'quiz', component: QuizComponent },
+            { path: 'quizManagement', component: QuizManagementComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

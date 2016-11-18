@@ -1,0 +1,14 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <form #f="ngForm" (ngSubmit)="save(f.value,f.valid)" novalidate>
+            <div>
+                <label>Titel</label>
+                <input type="text" name="titel" [(ngModel)]="quiz.titel" #name="ngModel" required />
+                <small class="text-danger" [hidden]="titel.valid || (titel.pristine && !f.submitted)">
+                    Titel is required
+                </small>
+            </div>
+            <button class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
