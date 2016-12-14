@@ -1,5 +1,6 @@
-﻿import {Injectable } from '@angular/core';
-import {tokenNotExpired } from 'angular2-jwt';
+﻿import { Injectable } from '@angular/core';
+import { tokenNotExpired } from 'angular2-jwt';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 declare var Auth0Lock: any;
 
@@ -10,7 +11,20 @@ export class Auth {
     constructor() {
         this.lock.on('authenticated', (authResult) => {
             localStorage.setItem('id_token', authResult.idToken);
+            this.lock.getProfile(authResult.idToken, (err, profile: Auth0UserProfile) => {
+                if (err) {
+                    console.log("ERROR");
+                    console.log(err);
+                    return;
+                }
+
+                localStorage.setItem('profile', JSON.stringify(profile));
+            })
         });
+    }
+
+    public getCurrentUser() {
+        return JSON.parse(localStorage.getItem('profile'));
     }
 
     public login() {
@@ -23,5 +37,6 @@ export class Auth {
 
     public logout() {
         localStorage.removeItem('id_token');
+        localStorage.removeItem('profile');
     }
 }

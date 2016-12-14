@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using GreenQuiz.Models;
 
 namespace GreenQuiz
 {
@@ -30,6 +31,7 @@ namespace GreenQuiz
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+    
             services.AddMvc();
         }
 

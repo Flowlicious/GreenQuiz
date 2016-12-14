@@ -6,6 +6,19 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        LISTE HIER
+        <table class="table table-hover table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td *ngFor="let quiz of quizzes">
+                        {{quiz.Titel}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

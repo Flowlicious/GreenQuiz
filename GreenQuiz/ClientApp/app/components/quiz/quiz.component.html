@@ -1,13 +1,95 @@
 ﻿<div class="row">
     <div class="col-md-12">
         <form #f="ngForm" (ngSubmit)="save(f.value,f.valid)" novalidate>
-            <div>
-                <label>Titel</label>
-                <input type="text" name="titel" [(ngModel)]="quiz.titel" #name="ngModel" required />
-                <small class="text-danger" [hidden]="titel.valid || (titel.pristine && !f.submitted)">
-                    Titel is required
-                </small>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>Titel</label>
+                    <input type="text" class="form-control" name="titel" [(ngModel)]="quiz.Titel" #titel="ngModel" tabindex="1" required />
+                    <small class="text-danger" [hidden]="titel.valid || (titel.pristine && !f.submitted)">
+                        Titel is required
+                    </small>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="bs-callout bs-callout-default" *ngFor="let frage of quiz.Fragen">
+                        <h4>{{frage.Titel}}</h4>
+                        <div class="row">                           
+                            <div class="col-md-6">
+                                {{frage.Antworten[0].Text}} <i class="fa fa-check" aria-hidden="true" *ngIf="frage.RichtigeAntwort == 0"></i>
+                            </div>
+                            <div class="col-md-6">
+                                {{frage.Antworten[1].Text}} <i class="fa fa-check" aria-hidden="true" *ngIf="frage.RichtigeAntwort == 1"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{frage.Antworten[2].Text}} <i class="fa fa-check" aria-hidden="true" *ngIf="frage.RichtigeAntwort == 2"></i>
+                            </div>
+                            <div class="col-md-6">
+                                {{frage.Antworten[3].Text}} <i class="fa fa-check" aria-hidden="true" *ngIf="frage.RichtigeAntwort == 3"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Frage</label>
+                            <input type="text" tabindex="2" class="form-control" name="frageTitel" [(ngModel)]="neueFrage.Titel" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Antwort 1</label>
+                            <input type="text" tabindex="3" class="form-control" name="antwort1" [(ngModel)]="antwort1.Text" />
+                            <div class="radio" *ngIf="antwort1.Text">
+                                <label>
+                                    <input type="radio" name="richtigeAntwort" [(ngModel)]="neueFrage.RichtigeAntwort" value="0" />
+                                    Richtig
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Antwort 2</label>
+                            <input type="text" tabindex="4" class="form-control" name="antwort2" [(ngModel)]="antwort2.Text" [disabled]="!antwort1.Text" />
+                            <div class="radio" *ngIf="antwort2.Text">
+                                <label>
+                                    <input type="radio" name="richtigeAntwort" [(ngModel)]="neueFrage.RichtigeAntwort" value="1" />
+                                    Richtig
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Antwort 3</label>
+                            <input type="text" tabindex="5" class="form-control" name="antwort3" [(ngModel)]="antwort3.Text" [disabled]="!antwort1.Text || !antwort2.Text" />
+                            <div class="radio" *ngIf="antwort3.Text">
+                                <label>
+                                    <input type="radio" name="richtigeAntwort" [(ngModel)]="neueFrage.RichtigeAntwort" value="2" [disabled]="!antwort3.Text" />
+                                    Richtig
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Antwort 4</label>
+                            <input type="text"  tabindex="6" class="form-control" name="antwort4" [(ngModel)]="antwort4.Text" [disabled]="!antwort1.Text || !antwort2.Text || !antwort3.Text" />
+                            <div class="radio" *ngIf="antwort4.Text">
+                                <label>
+                                    <input type="radio" name="richtigeAntwort" [(ngModel)]="neueFrage.RichtigeAntwort" value="3" [disabled]="!antwort4.Text" />
+                                    Richtig
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" [disabled]="!neueFrage.RichtigeAntwort || (!antwort1.Text || !antwort2.Text)" (click)="frageHinzufuegen()">Frage hinzufügen</button>
+                </div>
+            </div>
+
             <button class="btn btn-primary">Save</button>
         </form>
     </div>
