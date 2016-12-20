@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace GreenQuiz.Models
 {
-    public interface IQuizRepository : IRepository<Quiz>
+    public interface IQuizSessionRepository : IRepository<QuizSession>
     {
-        Task<List<Quiz>> GetByPerson(string personId);
 
-       
     }
 }

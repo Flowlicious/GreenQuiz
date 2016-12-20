@@ -10,6 +10,7 @@ export class Auth {
 
     constructor() {
         this.lock.on('authenticated', (authResult) => {
+            debugger;
             localStorage.setItem('id_token', authResult.idToken);
             this.lock.getProfile(authResult.idToken, (err, profile: Auth0UserProfile) => {
                 if (err) {

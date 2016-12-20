@@ -33,7 +33,8 @@ module.exports = {
             'es6-shim',
             'es6-promise',
             'font-awesome/css/font-awesome.css',
-            'jquery',
+            'signalr/jquery.signalR.js',
+            'expose?jQuery!jquery',
             'zone.js',
 
         ]

@@ -8,6 +8,7 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuizManagementComponent } from './components/quizManagement/quiz.management.component';
+import { QuizSessionComponent } from './components/quizSession/quizSession.component';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { FormsModule } from '@angular/forms';
 
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
         FetchDataComponent,
         HomeComponent,
         QuizComponent,
-        QuizManagementComponent
+        QuizManagementComponent,
+        QuizSessionComponent
     ],
     providers: [
         AUTH_PROVIDERS
@@ -35,8 +37,9 @@ import { FormsModule } from '@angular/forms';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'quiz', component: QuizComponent },
             { path: 'quizManagement', component: QuizManagementComponent },
+            { path: 'quizSession/:id', component: QuizSessionComponent },
             { path: '**', redirectTo: 'home' }
-        ])
+        ], {useHash:true})
     ]
 })
 export class AppModule {

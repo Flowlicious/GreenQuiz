@@ -1,4 +1,4 @@
-﻿<h1>{{quizHello}}</h1>
+﻿<h1>Management</h1>
 <div class="row">
     <div class="col-md-12">
         <button class="btn btn-default btn-lg" routerLink="/quiz">Neu</button>
@@ -6,6 +6,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
+       länge {{quizzes.length}} <input type="button" (click)="test2()" value="testmich" />
         <table class="table table-hover table-striped table-responsive">
             <thead>
                 <tr>
@@ -13,10 +14,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td *ngFor="let quiz of quizzes">
+                <tr *ngFor="let quiz of quizzes">
+                    <td >
                         {{quiz.Titel}}
                     </td>
+                    <td><button type="button" class="btn btn-primary" (click)="neueSession(quiz)">Neue Session</button></td>
                 </tr>
             </tbody>
         </table>

@@ -3,7 +3,7 @@ export class Frage {
     constructor() {
 
     }
-    public Id: string;
+    public Id: number;
     public Titel: string;
     public Antworten: Antwort[];
     public RichtigeAntwort: number;

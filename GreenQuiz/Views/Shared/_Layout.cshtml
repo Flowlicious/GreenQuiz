@@ -4,9 +4,15 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - GreenQuiz</title>
-        <base href="/" />
+        <base href="/#" />
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js"></script>
+        <script src="/signalr/js"></script>
+
         <script src="http://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
+    
         <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+     
     </head>
     <body>
         @RenderBody()

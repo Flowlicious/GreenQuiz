@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using GreenQuiz.Models;
+using Newtonsoft.Json;
 
 namespace GreenQuiz
 {
@@ -31,8 +32,28 @@ namespace GreenQuiz
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-    
-            services.AddMvc();
+
+            //var settings = new JsonSerializerSettings();
+            //settings.ContractResolver = new SignalRContractResolver();
+
+            //var serializer = JsonSerializer.Create(settings);
+
+            //services.Add(new ServiceDescriptor(typeof(JsonSerializer),
+            //             provider => serializer,
+            //             ServiceLifetime.Transient));
+
+            //services.AddSingleton<IQuizRepository, QuizRepository>();
+
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableDetailedErrors = true;
+            });
+
+            services.AddMvc()
+               .AddJsonOptions(options =>
+               {
+                   options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+               });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,16 +93,29 @@ namespace GreenQuiz
 
             app.UseStaticFiles();
 
+            app.UseCors(
+              builder => builder.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials()).UseWebSockets(); 
+
+
+
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                //routes.MapSpaFallbackRoute(
+                //    name: "spa-fallback",
+                //    defaults: new { controller = "Home", action = "Index" });
             });
+
+       
+            app.UseSignalR();
+
         }
     }
 }

@@ -6,14 +6,15 @@ import { Auth } from '../../auth/auth.service';
 import { Quiz } from '../../model/quiz.model';
 import { Frage } from '../../model/frage.model';
 import { Antwort } from '../../model/antwort.model';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 import { QuizService } from '../../services/quiz.service';
+import { } from 'jQuery';
 
 @Component({
     selector: 'quiz',
     template: require('./quiz.component.html'),
     styles: [require('./quiz.component.css')],
-    providers: [Auth, QuizService, Router]
+    providers: [Auth, QuizService]
 
 })
 export class QuizComponent {
@@ -25,7 +26,7 @@ export class QuizComponent {
     public antwort4: Antwort;
 
     currentUser: Auth0UserProfile;
-    constructor(private http: Http, public auth: Auth, private router: Router, private quizService: QuizService) {
+    constructor(private http: Http, public auth: Auth, private quizService: QuizService) {
         this.quiz = new Quiz();
         this.neueFrage = new Frage();
         this.antwort1 = new Antwort();
@@ -36,11 +37,11 @@ export class QuizComponent {
 
 
     public save(quiz: Quiz, valid) {    
-        debugger;  
         if (valid && this.auth.getCurrentUser()) {
             this.quiz.PersonId = this.auth.getCurrentUser().user_id;
+
             this.quizService.save(this.quiz);
-            this.router.navigateByUrl('/quizManagement');
+          //  this.router.navigateByUrl('/quizManagement');
         }
     }
 
